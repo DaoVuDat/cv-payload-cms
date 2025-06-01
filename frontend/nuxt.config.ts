@@ -1,5 +1,3 @@
-import tailwindcss from '@tailwindcss/vite'
-
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
@@ -19,9 +17,10 @@ export default defineNuxtConfig({
   css: [
     '~/assets/css/global.css',
   ],
-  vite: {
-    plugins: [
-      tailwindcss(),
-    ],
+  postcss: {
+    plugins: {
+      'tailwindcss/nesting': 'postcss-nesting',
+      'tailwindcss': {}
+    },
   },
 })
