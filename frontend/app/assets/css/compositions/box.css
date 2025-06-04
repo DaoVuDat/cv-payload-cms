@@ -1,8 +1,15 @@
-box-l {
-  display: block;
+.box {
   padding: var(--s1);
-  border-width: var(--border-thin);
-  /* ↓ For high contrast mode */
-  outline: var(--border-thin) solid transparent;
-  outline-offset: calc(var(--border-thin) * -1);
+  border: var(--box-border) solid;
+  color: var(--color-dark, #fff);
+  background-color: var(--color-light, #000);
+}
+
+.box * {
+  color: inherit;
+}
+
+.box.invert {
+  color: var(--color-light);
+  background-color: var(--color-dark);
 }

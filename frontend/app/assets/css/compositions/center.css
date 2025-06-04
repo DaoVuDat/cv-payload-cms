@@ -1,6 +1,9 @@
-center-l {
-  display: block;
+.center {
   box-sizing: content-box;
   margin-inline: auto;
   max-inline-size: var(--measure);
+}
+
+.center[data-text-center] {
+  text-align: center;
 }

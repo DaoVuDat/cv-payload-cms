@@ -3,11 +3,11 @@
 </script>
 
 <template>
-    <cover-l centered="center-l" space="var(--gutter)">
-        <center-l>
+    <div class="cover">
+        <div class="center">
           <h1 class="text-red-500">Center testing</h1>
-        </center-l>
-    </cover-l>
+        </div>
+    </div>
 </template>
 
 <style scoped>

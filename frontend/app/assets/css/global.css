@@ -1,9 +1,9 @@
-@import 'tailwindcss/base';
+@import 'tailwindcss';
+
+@import './global/tailwind-theme.css';
 
 @import './global/reset.css';
 @import './global/fonts.css';
-
-@import 'tailwindcss/components';
 
 @import './global/variables.css';
 @import './global/global-styles.css';
@@ -11,5 +11,3 @@
 @import './blocks/index.css';
 @import './compositions/index.css';
 @import './utilities/index.css';
-
-@import 'tailwindcss/utilities';

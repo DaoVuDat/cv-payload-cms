@@ -1,0 +1,59 @@
+@theme {
+    /* Remove all default breakpoints */
+    --breakpoint-*: initial;
+
+    /* Define your custom breakpoints */
+    --breakpoint-min: 330px;
+    --breakpoint-mid: 760px;
+    --breakpoint-large: 940px;
+    --breakpoint-max: 1350px;
+
+    /* Define your custom colors */
+    --color-dark: #171406;
+    --color-dark-glare: #2d2816;
+    --color-mid: #ABA9A2;
+    --color-light: #ffffff;
+    --color-primary: #fccd26;
+
+    /* Fluid Space */
+    --space-xs: clamp(0.4375rem, 0.4158rem + 0.1087vw, 0.5rem);
+    --space-s: clamp(0.875rem, 0.8315rem + 0.2174vw, 1rem);
+    --space-m: clamp(1.3125rem, 1.2473rem + 0.3261vw, 1.5rem);
+    --space-l: clamp(2.1875rem, 2.0788rem + 0.5435vw, 2.5rem);
+    --space-xl: clamp(3.0625rem, 2.9103rem + 0.7609vw, 3.5rem);
+    --space-2xl: clamp(3.5rem, 3.3261rem + 0.8696vw, 4rem);
+    --space-3xl: clamp(4.375rem, 4.1576rem + 1.087vw, 5rem);
+    --space-4xl: clamp(6.5625rem, 6.2364rem + 1.6304vw, 7.5rem);
+
+    --space-xs-l: clamp(0.4375rem, -0.2799rem + 3.587vw, 2.5rem);
+    --space-m-l: clamp(1.3125rem, 0.8995rem + 2.0652vw, 2.5rem);
+    --space-2xl-4xl: clamp(3.5rem, 2.1087rem + 6.9565vw, 7.5rem);
+
+    /* Fluid Type Scale */
+    --step--2: clamp(0.7407rem, 0.7265rem + 0.0609vw, 0.7813rem);
+    --step--1: clamp(0.8333rem, 0.7967rem + 0.1565vw, 0.9375rem);
+    --step-0: clamp(0.9375rem, 0.8715rem + 0.2817vw, 1.125rem);
+    --step-1: clamp(1.0547rem, 0.9507rem + 0.4437vw, 1.35rem);
+    --step-2: clamp(1.1865rem, 1.0339rem + 0.6512vw, 1.62rem);
+    --step-3: clamp(1.3348rem, 1.1203rem + 0.9152vw, 1.944rem);
+    --step-4: clamp(1.5017rem, 1.2091rem + 1.2486vw, 2.3328rem);
+    --step-5: clamp(1.6894rem, 1.2986rem + 1.6675vw, 2.7994rem);
+    --step-6: clamp(1.9006rem, 1.387rem + 2.1914vw, 3.3592rem);
+    --step-7: clamp(2.1382rem, 1.4716rem + 2.8438vw, 4.0311rem);
+    --step-8: clamp(2.4054rem, 1.5491rem + 3.6535vw, 4.8373rem);
+    --step-9: clamp(2.7061rem, 1.615rem + 4.6553vw, 5.8048rem);
+    --step-10: clamp(3.0444rem, 1.6636rem + 5.8912vw, 6.9657rem);
+
+    /* Define your custom line heights */
+    --leading-micro: 0.85;
+    --leading-flat: 1;
+    --leading-fine: 1.2;
+    --leading-standard: 1.4;
+    --leading-loose: 1.7;
+
+    /* Define your custom font weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
+    --font-weight-black: 900;
+}
