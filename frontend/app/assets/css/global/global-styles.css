@@ -90,7 +90,7 @@ kbd {
 
 var {
     font-style: normal;
-    font-weight: var(--font-medium);
+    font-weight: var(--font-weight-medium);
 }
 
 q {
@@ -112,7 +112,7 @@ ul ::marker {
 
 ol ::marker {
     font-size: 1em;
-    font-weight: var(--font-bold);
+    font-weight: var(--font-weight-bold);
 }
 
 /* Lists with classes and roles will be out of standard flow, so remove the default spacing */
@@ -123,7 +123,7 @@ ol ::marker {
 }
 
 dt {
-    font-weight: var(--font-medium);
+    font-weight: var(--font-weight-medium);
 }
 
 dt + dd {
@@ -182,7 +182,7 @@ table {
 
 th {
     text-align: left;
-    font-weight: var(--font-bold);
+    font-weight: var(--font-weight-bold);
     line-height: var(--leading-fine);
 }
 
@@ -308,7 +308,7 @@ form > * + * {
 
 label {
     line-height: var(--leading-fine);
-    font-weight: var(--font-medium);
+    font-weight: var(--font-weight-medium);
 }
 
 label::after {
@@ -322,7 +322,7 @@ label:has(input) {
     display: flex;
     align-items: baseline;
     gap: var(--space-s);
-    font-weight: var(--font-normal);
+    font-weight: var(--font-weight-normal);
 }
 
 label:has(input) + label:has(input) {
@@ -351,12 +351,12 @@ fieldset {
 }
 
 legend {
-    font-weight: var(--font-medium);
+    font-weight: var(--font-weight-medium);
     padding-inline: var(--space-xs);
 }
 
 summary {
-    font-weight: var(--font-bold);
+    font-weight: var(--font-weight-bold);
     cursor: pointer;
 }
 

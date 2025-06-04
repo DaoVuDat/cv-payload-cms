@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   min-block-size: 100vh;
-  padding: var(--s1, 0);
+  padding: var(--padding, 0);
 }
 
 .cover > * {
@@ -18,5 +18,5 @@
 }
 
 .cover > :is(h1,div) {
-  margin-block: auto;
+  margin-block: var(--cover-centered-margin, auto);
 }

@@ -25,24 +25,31 @@
     --space-3xl: clamp(4.375rem, 4.1576rem + 1.087vw, 5rem);
     --space-4xl: clamp(6.5625rem, 6.2364rem + 1.6304vw, 7.5rem);
 
-    --space-xs-l: clamp(0.4375rem, -0.2799rem + 3.587vw, 2.5rem);
+    --space-xs-s: clamp(0.4375rem, 0.2418rem + 0.9783vw, 1rem);
+    --space-s-m: clamp(0.875rem, 0.6576rem + 1.087vw, 1.5rem);
     --space-m-l: clamp(1.3125rem, 0.8995rem + 2.0652vw, 2.5rem);
+    --space-l-xl: clamp(2.1875rem, 1.731rem + 2.2826vw, 3.5rem);
+    --space-xl-2xl: clamp(3.0625rem, 2.7364rem + 1.6304vw, 4rem);
+    --space-2xl-3xl: clamp(3.5rem, 2.9783rem + 2.6087vw, 5rem);
+    --space-3xl-4xl: clamp(4.375rem, 3.288rem + 5.4348vw, 7.5rem);
+
+    --space-xs-l: clamp(0.4375rem, -0.2799rem + 3.587vw, 2.5rem);
     --space-2xl-4xl: clamp(3.5rem, 2.1087rem + 6.9565vw, 7.5rem);
 
     /* Fluid Type Scale */
-    --step--2: clamp(0.7407rem, 0.7265rem + 0.0609vw, 0.7813rem);
-    --step--1: clamp(0.8333rem, 0.7967rem + 0.1565vw, 0.9375rem);
-    --step-0: clamp(0.9375rem, 0.8715rem + 0.2817vw, 1.125rem);
-    --step-1: clamp(1.0547rem, 0.9507rem + 0.4437vw, 1.35rem);
-    --step-2: clamp(1.1865rem, 1.0339rem + 0.6512vw, 1.62rem);
-    --step-3: clamp(1.3348rem, 1.1203rem + 0.9152vw, 1.944rem);
-    --step-4: clamp(1.5017rem, 1.2091rem + 1.2486vw, 2.3328rem);
-    --step-5: clamp(1.6894rem, 1.2986rem + 1.6675vw, 2.7994rem);
-    --step-6: clamp(1.9006rem, 1.387rem + 2.1914vw, 3.3592rem);
-    --step-7: clamp(2.1382rem, 1.4716rem + 2.8438vw, 4.0311rem);
-    --step-8: clamp(2.4054rem, 1.5491rem + 3.6535vw, 4.8373rem);
-    --step-9: clamp(2.7061rem, 1.615rem + 4.6553vw, 5.8048rem);
-    --step-10: clamp(3.0444rem, 1.6636rem + 5.8912vw, 6.9657rem);
+    --size-step--2: clamp(0.72rem, 0.748rem + -0.0312vw, 0.7407rem);
+    --size-step--1: clamp(0.8333rem, 0.8099rem + 0.1002vw, 0.9rem);
+    --size-step-0: clamp(0.9375rem, 0.8715rem + 0.2817vw, 1.125rem);
+    --size-step-1: clamp(1.0547rem, 0.9309rem + 0.5282vw, 1.4063rem);
+    --size-step-2: clamp(1.1865rem, 0.9854rem + 0.8583vw, 1.7578rem);
+    --size-step-3: clamp(1.3348rem, 1.0312rem + 1.2957vw, 2.1973rem);
+    --size-step-4: clamp(1.5017rem, 1.0634rem + 1.8703vw, 2.7466rem);
+    --size-step-5: clamp(1.6894rem, 1.0754rem + 2.6198vw, 3.4332rem);
+    --size-step-6: clamp(1.9006rem, 1.0587rem + 3.592vw, 4.2915rem);
+    --size-step-7: clamp(2.1382rem, 1.0021rem + 4.847vw, 5.3644rem);
+    --size-step-8: clamp(2.4054rem, 0.8913rem + 6.4602vw, 6.7055rem);
+    --size-step-9: clamp(2.7061rem, 0.7076rem + 8.527vw, 8.3819rem);
+    --size-step-10: clamp(3.0444rem, 0.4271rem + 11.167vw, 10.4774rem);
 
     /* Define your custom line heights */
     --leading-micro: 0.85;

@@ -11,5 +11,8 @@
     --radius-m: 0.75rem;
     --radius-l: 2.5rem;
     --uppercase-kerning: 0.04ch;
+
+    --font-base: Satoshi, Inter, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif;
+    --font-mono: DM Mono, monospace;
 }
 
