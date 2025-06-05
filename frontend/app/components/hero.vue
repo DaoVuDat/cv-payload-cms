@@ -6,31 +6,20 @@ const {$gsap: gsap} = useNuxtApp()
 
 let target: HTMLSpanElement | null = null
 let scrambleTween: GSAPTween | null = null
-const targetText = 'Developer.'
-const defaultChars = 'ABCDEFGH56789!@#$%^&*()_+-=[]{}|;:,.<>?'
+const targetText = 'developer.'
+const defaultChars = 'abcdefghijkmn56789!@#$%^&*?'
 
-function scrambleText(type: 'original' | 'target') {
-  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-    gsap.killTweensOf(target);
-
-    if (type === 'target') {
-      scrambleTween?.play();
-    } else {
-      scrambleTween?.reverse();
-    }
-  }
-}
 
 onMounted(() => {
   gsap.registerPlugin(ScrambleTextPlugin)
   target = document.querySelector('.hacker-text')
 
   scrambleTween = gsap.to(target, {
-    duration: 0.5,
+    duration: 0.8,
     ease: "none",
     scrambleText: {
       text: targetText,
-      speed: 2,
+      speed: 2.5,
       tweenLength: false,
       chars: defaultChars,
     },
@@ -45,11 +34,11 @@ onUnmounted(() => {
 <template>
   <div class="hero">
     <div class="cover wrapper">
-      <div class="[utilities] uppercase">
-        <h1 class="hacker-text"
+      <div class="[utilities] lowercase text-center cursor-pointer">
+        <h1 class="hacker-text font-ocr font-medium"
             @pointerenter="scrambleTween?.play()"
             @pointerleave="scrambleTween?.reverse()">
-            Test TestT
+            dat dao vu
         </h1>
       </div>
     </div>
@@ -90,7 +79,7 @@ h1 {
   text-shadow: 0 0 10px #00ff41,
   0 0 20px #00ff41,
   0 0 30px #00ff41;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.01em;
   cursor: pointer;
   position: relative;
   text-wrap: nowrap;
