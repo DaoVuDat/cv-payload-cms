@@ -50,6 +50,8 @@
     --size-step-8: clamp(2.4054rem, 0.8913rem + 6.4602vw, 6.7055rem);
     --size-step-9: clamp(2.7061rem, 0.7076rem + 8.527vw, 8.3819rem);
     --size-step-10: clamp(3.0444rem, 0.4271rem + 11.167vw, 10.4774rem);
+    --size-step-11: clamp(3.78875rem, 1.63rem + 10.45vw, 10.448125rem);
+    --size-step-12: clamp(3.78875rem, 0.36rem + 16.61vw, 14.375rem);
 
     /* Define your custom line heights */
     --leading-micro: 0.85;
