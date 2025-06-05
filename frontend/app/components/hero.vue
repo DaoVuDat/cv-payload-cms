@@ -5,36 +5,37 @@ import {ScrambleTextPlugin} from 'gsap/ScrambleTextPlugin';
 const {$gsap: gsap} = useNuxtApp()
 
 let target: HTMLSpanElement | null = null
-const originalText = 'Test Test T'
+let scrambleTween: GSAPTween | null = null
 const targetText = 'Developer.'
-const defaultChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+-=[]{}|;:,.<>?'
+const defaultChars = 'ABCDEFGH56789!@#$%^&*()_+-=[]{}|;:,.<>?'
 
 function scrambleText(type: 'original' | 'target') {
-  if (!gsap.isTweening(target) && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-    let text = "";
-    if (type === 'target') {
-      text = targetText;
-    } else {
-      text = originalText;
-    }
+  if (window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+    gsap.killTweensOf(target);
 
-    gsap.to(target, {
-      duration: .8,
-      ease: 'sine.in',
-      scrambleText: {
-        text: text,
-        speed: 2,
-        chars: defaultChars,
-      }
-    });
-    return null
+    if (type === 'target') {
+      scrambleTween?.play();
+    } else {
+      scrambleTween?.reverse();
+    }
   }
 }
-
 
 onMounted(() => {
   gsap.registerPlugin(ScrambleTextPlugin)
   target = document.querySelector('.hacker-text')
+
+  scrambleTween = gsap.to(target, {
+    duration: 0.5,
+    ease: "none",
+    scrambleText: {
+      text: targetText,
+      speed: 2,
+      tweenLength: false,
+      chars: defaultChars,
+    },
+    paused: true,
+  });
 })
 
 onUnmounted(() => {
@@ -45,13 +46,10 @@ onUnmounted(() => {
   <div class="hero">
     <div class="cover wrapper">
       <div class="[utilities] uppercase">
-        <h1 class="container-fill-text"
-            @pointerenter="scrambleText('target')"
-            @pointerleave="scrambleText('original')">
-          <span class="container-fill-text__container">
-            <span class="hacker-text container-fill-text__display">Test Test T</span>
-          </span>
-          <span class="container-fill-text__reference" aria-hidden="true">Dat Dao Vu</span>
+        <h1 class="hacker-text"
+            @pointerenter="scrambleTween?.play()"
+            @pointerleave="scrambleTween?.reverse()">
+            Test TestT
         </h1>
       </div>
     </div>
@@ -62,6 +60,7 @@ onUnmounted(() => {
 .hero {
   container-type: inline-size;
   container-name: hero;
+  overflow: hidden;
 }
 
 @container hero (width < 700px) {
@@ -70,7 +69,7 @@ onUnmounted(() => {
     --cover-min-block-size: auto;
   }
 
-  .container-fill-text__display {
+  h1 {
     --default-text-size: var(--size-step-10);
   }
 }
@@ -80,13 +79,13 @@ onUnmounted(() => {
     --cover-centered-margin: 3rem;
   }
 
-  .container-fill-text__display {
-    --default-text-size: var(--size-step-5);
+  h1 {
+    --default-text-size: var(--size-step-6);
   }
 }
 
-
 h1 {
+  font-size: var(--default-text-size, var(--size-step-11));
   color: #00ff41;
   text-shadow: 0 0 10px #00ff41,
   0 0 20px #00ff41,
@@ -94,13 +93,10 @@ h1 {
   letter-spacing: 0.1em;
   cursor: pointer;
   position: relative;
-}
-
-.hacker-text {
   text-wrap: nowrap;
 }
 
-.hacker-text:hover {
+h1:hover {
   text-shadow: 0 0 20px #00ff41,
   0 0 40px #00ff41,
   0 0 60px #00ff41,
