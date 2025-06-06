@@ -63,7 +63,7 @@ const tech: ITech[] = [
 </script>
 
 <template>
-  <section class="[layout] wrapper">
+  <section class="[layout] cover wrapper">
     <div class="[block] intro [layout] sidebar">
       <div class="intro__content center">
         <p class="">
@@ -75,7 +75,9 @@ const tech: ITech[] = [
       </div>
       <div>
         <div class="intro__tech flow center text-center">
-          <h2 class="font-bold">Technologies.</h2>
+          <GlitchText text="projects.">
+            <h2 class="font-bold">Technologies.</h2>
+          </GlitchText>
           <div class="
         tech-list
         [layout] grid">

@@ -4,9 +4,11 @@ import Timeline from "~/components/timeline.vue";
 </script>
 
 <template>
-  <Hero />
-  <Intro />
-  <Timeline />
+  <div class="flow" :style="{'--flow-space': 'var(--space-4xl)'}">
+    <Hero />
+    <Intro />
+    <Timeline />
+  </div>
 </template>
 
 <style scoped>
