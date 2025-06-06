@@ -23,7 +23,9 @@ onMounted(() => {
       tweenLength: false,
       chars: defaultChars,
     },
-    paused: true,
+    yoyo: true,
+    repeat: -1,
+    repeatDelay: 3,
   });
 })
 
@@ -35,9 +37,7 @@ onUnmounted(() => {
   <div class="hero">
     <div class="cover wrapper">
       <div class="[utilities] lowercase text-center cursor-pointer">
-        <h1 class="hacker-text font-ocr font-medium"
-            @pointerenter="scrambleTween?.play()"
-            @pointerleave="scrambleTween?.reverse()">
+        <h1 class="hacker-text font-ocr font-medium">
             dat dao vu
         </h1>
       </div>
@@ -69,7 +69,7 @@ onUnmounted(() => {
   }
 
   h1 {
-    --default-text-size: var(--size-step-6);
+    --default-text-size: var(--size-step-8);
   }
 }
 

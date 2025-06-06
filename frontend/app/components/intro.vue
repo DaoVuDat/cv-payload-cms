@@ -75,7 +75,7 @@ const tech: ITech[] = [
       </div>
       <div>
         <div class="intro__tech flow center text-center">
-          <GlitchText text="projects.">
+          <GlitchText text="projects." :rotate="-5">
             <h2 class="font-bold">Technologies.</h2>
           </GlitchText>
           <div class="

@@ -3,6 +3,7 @@ const {$gsap: gsap} = useNuxtApp();
 
 defineProps<{
   text: string;
+  rotate?: number;
 }>()
 
 onMounted(() => {
@@ -37,7 +38,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div id="txt">
+  <div id="txt" :style="{'rotate': rotate + 'deg'}">
     <!-- Invisible content to maintain space -->
     <div class="content-spacer" aria-hidden="true">
       <slot />
@@ -66,6 +67,7 @@ onMounted(() => {
 
 .content-spacer {
   visibility: hidden; /* Hidden but takes up space */
+  padding: var(--space-xs);
   z-index: 1;
 }
 
