@@ -110,7 +110,7 @@ onMounted(() => {
     const direction = yearIdx % 2 === 0 ? -1 : 1;
 
     const projectCards = year.querySelectorAll(".project-card")
-    console.log(projectCards)
+
     projectCards.forEach((card) => {
       gsap.set(card, {xPercent: 100 * direction})
     })
@@ -129,7 +129,7 @@ onMounted(() => {
 
     projectCards.forEach((item, projectCardIdx) => {
       timeline.to(item, {
-        scale: 0.9,
+        scale: 0.8,
         borderRadius: "var(--border-radius)",
       });
 
