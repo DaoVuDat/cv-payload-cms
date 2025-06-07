@@ -106,11 +106,13 @@ const {$gsap: gsap} = useNuxtApp()
 onMounted(() => {
   const timeLineProjectSummaries = document.querySelectorAll(".timeline__project-summary");
 
-  timeLineProjectSummaries.forEach((year) => {
+  timeLineProjectSummaries.forEach((year, yearIdx) => {
+    const direction = yearIdx % 2 === 0 ? -1 : 1;
+
     const projectCards = year.querySelectorAll(".project-card")
     console.log(projectCards)
     projectCards.forEach((card) => {
-      gsap.set(card, {xPercent: 100})
+      gsap.set(card, {xPercent: 100 * direction})
     })
 
     const timeline = gsap.timeline({
@@ -121,18 +123,19 @@ onMounted(() => {
         end: () => `+=${projectCards.length * 100}%`,
         scrub: 1,
         invalidateOnRefresh: true,
-        markers: true,
       },
       defaults: {ease: "none"},
     });
 
     projectCards.forEach((item, projectCardIdx) => {
-      // timeline.to(item, {
-      //   scale: 0.9,
-      //   borderRadius: "10px",
-      // });
+      timeline.to(item, {
+        scale: 0.9,
+        borderRadius: "var(--border-radius)",
+      });
+
+      // use old projectCard to move
       timeline.to(
-          projectCards[projectCardIdx+1]!,
+          projectCards[projectCardIdx]!,
           {
             xPercent: 0,
           },
@@ -146,30 +149,35 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="wrapper flow">
-
-    <div class="center text-center">
-      <GlitchText text="projects." :rotate="-5">
-        <h2 class="font-bold">Projects.</h2>
-      </GlitchText>
-    </div>
-
-    <div v-for="yearProject in yearsProjects" :key="yearProject.year" class="timeline__project-summary">
-      <h3 class="font-bold center">{{ yearProject.year }}</h3>
-      <div class="timeline__projects-wrapper">
-        <div class="timeline__projects flow" role="list" style="--flow-space: var(--space-s)">
-          <div v-for="project in yearProject.projects" role="listitem" :key="project.title" class="project-card">
-            <h4 class="text-xl font-semibold">{{ project.title }}</h4>
-            <p>{{ project.description }}</p>
-            <p><strong>Role:</strong> {{ project.role }}</p>
-            <p><strong>Status:</strong> {{ project.status }}</p>
-            <p><strong>Technologies:</strong> {{ project.technologies.join(', ') }}</p>
-            <p><strong>Duration:</strong> {{ project.startDate }} - {{ project.endDate || 'Ongoing' }}</p>
-          </div>
-        </div>
+  <section class="cover">
+    <div class="flow">
+      <div class="center text-center">
+        <GlitchText text="projects." :rotate="-5">
+          <h2 class="font-bold">Projects.</h2>
+        </GlitchText>
       </div>
 
+      <div v-for="yearProject in yearsProjects" :key="yearProject.year" class="timeline__project-summary">
+        <h3 class="font-bold center">{{ yearProject.year }}</h3>
+        <div class="timeline__projects-wrapper">
+          <div class="timeline__projects" role="list">
+            <div v-for="project in yearProject.projects"
+                 role="listitem"
+                 :key="project.title"
+                 class="project-card flow">
+              <h4 class="text-xl font-semibold">{{ project.title }}</h4>
+              <p>{{ project.description }}</p>
+              <p><strong>Role:</strong> {{ project.role }}</p>
+              <p><strong>Status:</strong> {{ project.status }}</p>
+              <p><strong>Technologies:</strong> {{ project.technologies.join(', ') }}</p>
+              <p><strong>Duration:</strong> {{ project.startDate }} - {{ project.endDate || 'Ongoing' }}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
+
 
   </section>
 </template>
@@ -205,10 +213,8 @@ onMounted(() => {
   inset: 0;
   height: 100%;
   width: 100%;
-  display: flex;
-  place-items: center;
-  //background-color: var(--color-primary);
-  //color: var(--color-dark-glare);
+  background-color: var(--color-primary);
+  color: var(--color-dark-glare);
 
 }
 
