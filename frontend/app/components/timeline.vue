@@ -123,6 +123,7 @@ onMounted(() => {
         end: () => `+=${projectCards.length * 100}%`,
         scrub: 1,
         invalidateOnRefresh: true,
+
       },
       defaults: {ease: "none"},
     });
@@ -131,6 +132,7 @@ onMounted(() => {
       timeline.to(item, {
         scale: 0.8,
         borderRadius: "var(--border-radius)",
+        delay: projectCardIdx === 0 ? 0.2 : 0,
       });
 
       // use old projectCard to move
@@ -157,23 +159,26 @@ onMounted(() => {
         </GlitchText>
       </div>
 
-      <div v-for="yearProject in yearsProjects" :key="yearProject.year" class="timeline__project-summary">
-        <h3 class="font-bold center">{{ yearProject.year }}</h3>
-        <div class="timeline__projects-wrapper">
-          <div class="timeline__projects" role="list">
-            <div v-for="project in yearProject.projects"
-                 role="listitem"
-                 :key="project.title"
-                 class="project-card flow">
-              <h4 class="text-xl font-semibold">{{ project.title }}</h4>
-              <p>{{ project.description }}</p>
-              <p><strong>Role:</strong> {{ project.role }}</p>
-              <p><strong>Status:</strong> {{ project.status }}</p>
-              <p><strong>Technologies:</strong> {{ project.technologies.join(', ') }}</p>
-              <p><strong>Duration:</strong> {{ project.startDate }} - {{ project.endDate || 'Ongoing' }}</p>
+      <div class="flow" style="--flow-space: var(--space-l)">
+        <div v-for="yearProject in yearsProjects" :key="yearProject.year" class="timeline__project-summary">
+          <h3 class="font-bold center">{{ yearProject.year }}</h3>
+          <div class="timeline__projects-wrapper">
+            <div class="timeline__projects" role="list">
+              <div v-for="project in yearProject.projects"
+                   role="listitem"
+                   :key="project.title"
+                   class="project-card flow">
+                <h4 class="text-xl font-semibold">{{ project.title }}</h4>
+                <p>{{ project.description }}</p>
+                <p><strong>Role:</strong> {{ project.role }}</p>
+                <p><strong>Status:</strong> {{ project.status }}</p>
+                <p><strong>Technologies:</strong> {{ project.technologies.join(', ') }}</p>
+                <p><strong>Duration:</strong> {{ project.startDate }} - {{ project.endDate || 'Ongoing' }}</p>
+              </div>
             </div>
           </div>
-        </div>
+      </div>
+
 
       </div>
     </div>
