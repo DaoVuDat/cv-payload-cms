@@ -5,12 +5,13 @@ import {TextPlugin} from "gsap/TextPlugin";
 import {GSDevTools} from "gsap/GSDevTools";
 
 export default defineNuxtPlugin((nuxtApp) => {
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, TextPlugin,GSDevTools);
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, TextPlugin, GSDevTools);
 
     ScrollTrigger.normalizeScroll(true);
 
     let smoother = ScrollSmoother.create({
         smooth: 2,
+        effects: true,
     })
 
     return {

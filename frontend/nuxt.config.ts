@@ -25,4 +25,7 @@ export default defineNuxtConfig({
   svgo: {
     dts: true,
   },
+  runtimeConfig: {
+    cmsApi: process.env.CMS_API || 'http://localhost:3000/api',
+  }
 })
