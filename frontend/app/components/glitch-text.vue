@@ -16,8 +16,8 @@ onMounted(() => {
       .to('.glitch', {duration: 0.04, x: -20})
       .to('.glitch', {duration: 0.04, x: 0})
       .addLabel("split", 0)
-      .to('.top', {duration: 0.05, x: -15, ease: "power4.inOut"}, 'split')
-      .to('.bottom', {duration: 0.05, x: 15, ease: "power4.inOut"}, 'split')
+      .to('.top', {duration: 0.2, x: -25, ease: "power4.inOut"}, 'split')
+      .to('.bottom', {duration: 0.2, x: 25, ease: "power4.inOut"}, 'split')
       .to('.glitch', {duration: 0.08, textShadow: "-3px 0 red"}, 'split')
 
       .to('#txt', {duration: 0, scale: 1.1}, 'split')
@@ -27,8 +27,8 @@ onMounted(() => {
       .to('.glitch', {duration: 0.03, textShadow: '-3px 0 green'}, 'split')
       .to('.glitch', {duration: 0.03, textShadow: "none"}, "+=0.01")
 
-      .to('.top', {duration: 0.02, x: 0, ease: "power4.inOut"}, "split+=0.05")
-      .to('.bottom', {duration: 0.02, x: 0, ease: "power4.inOut"}, "split+=0.05")
+      .to('.top', {duration: 0.02, x: 0, ease: "power4.inOut"}, "split+=0.2")
+      .to('.bottom', {duration: 0.02, x: 0, ease: "power4.inOut"}, "split+=0.2")
 
       .to('.glitch', {duration: 0.02, scaleY: 1.1, ease: "power4.inOut"})
       .to('.glitch', {duration: 0.04, scaleY: 1, ease: "power4.inOut"})
@@ -68,13 +68,12 @@ onMounted(() => {
 .content-spacer {
   visibility: hidden; /* Hidden but takes up space */
   padding: var(--space-xs);
-  z-index: 1;
 }
 
 #txt {
   margin: auto;
   position: relative;
   display: inline-block;
-  z-index: 2;
+
 }
 </style>

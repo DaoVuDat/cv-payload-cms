@@ -8,6 +8,7 @@ import Timeline from "~/components/timeline.vue";
     <Hero />
     <Intro />
     <Timeline />
+    <div class="flex flex-col justify-center items-center min-h-screen">Contact</div>
   </div>
 </template>
 

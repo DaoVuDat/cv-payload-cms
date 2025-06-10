@@ -17,7 +17,8 @@ export default defineNuxtPlugin((nuxtApp) => {
     return {
         provide: {
             gsap: gsap,
-            smoother
+            smoother,
+            scrollTrigger: ScrollTrigger,
         }
     }
 })
