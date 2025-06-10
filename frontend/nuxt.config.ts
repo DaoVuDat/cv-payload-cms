@@ -21,11 +21,19 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true
   },
-  modules: ['nuxt-svgo'],
+  modules: ['nuxt-svgo', '@nuxt/icon'],
   svgo: {
     dts: true,
   },
   runtimeConfig: {
     cmsApi: process.env.CMS_API || 'http://localhost:3000/api',
+  },
+  icon: {
+    customCollections: [
+      {
+        prefix: 'custom',
+        dir: './app/assets/icons',
+      }
+    ]
   }
 })

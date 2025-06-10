@@ -1,13 +1,15 @@
 <script setup lang="ts">
-const { data, error, status } = useFetch("/api/projects");
+import type {SerializedEditorState} from "@payloadcms/richtext-lexical/lexical";
+import {convertLexicalToHTML} from "@payloadcms/richtext-lexical/html";
 
+const {data, error, status} = useFetch("/api/projects");
 console.log("data", data.value?.projects);
 
-const { $gsap: gsap } = useNuxtApp();
+const {$gsap: gsap} = useNuxtApp();
 
 onMounted(() => {
   const timeLineProjectSummaries = document.querySelectorAll(
-    ".timeline__project-summary"
+      ".timeline__project-summary"
   );
 
   timeLineProjectSummaries.forEach((year, yearIdx) => {
@@ -16,7 +18,7 @@ onMounted(() => {
     const projectCards = year.querySelectorAll(".project-card");
 
     projectCards.forEach((card) => {
-      gsap.set(card, { xPercent: 100 * direction });
+      gsap.set(card, {xPercent: 100 * direction});
     });
 
     const timeline = gsap.timeline({
@@ -27,29 +29,29 @@ onMounted(() => {
         end: () => `+=${projectCards.length * 100}%`,
         scrub: 1,
         invalidateOnRefresh: true,
-      
+
       },
-      defaults: { ease: "none" },
+      defaults: {ease: "none",},
     });
 
     projectCards.forEach((item, projectCardIdx) => {
       timeline.to(item, {
         scale: 0.8,
         borderRadius: "var(--border-radius)",
-        delay: projectCardIdx === 0 ? 0 : 0.5,
+        delay: projectCardIdx === 0 ? 0 : 1,
       });
 
       // use old projectCard to move
       timeline.to(
-        projectCards[projectCardIdx]!,
-        {
-          xPercent: 0,
-        },
-        "<"
+          projectCards[projectCardIdx]!,
+          {
+            xPercent: 0,
+          },
+          "<"
       );
-
-      timeline.to(item, {duration: 2})
     });
+
+    timeline.to({}, {duration: 1})
   });
 });
 </script>
@@ -72,21 +74,23 @@ onMounted(() => {
         </div>
         <template v-if="data && data.projects && data.projects.length > 0">
           <div
-            v-for="project in data.projects"
-            :key="project.year"
-            class="timeline__project-summary"
+              v-for="project in data.projects"
+              :key="project.year"
+              class="timeline__project-summary"
           >
             <h3 class="font-bold center">{{ project.year }}</h3>
             <div class="timeline__projects-wrapper">
               <div class="timeline__projects" role="list">
                 <div
-                  v-for="item in project.projects"
-                  role="listitem"
-                  :key="item.title"
-                  class="project-card flow"
+                    v-for="item in project.projects"
+                    role="listitem"
+                    :key="item.title"
+                    class="project-card flow"
                 >
-                  <h4 class="text-xl font-semibold">{{ item.title }}</h4>
-                  <p>{{ item.description }}</p>
+                  <h4 class="project-card__heading">{{ item.title }}</h4>
+                  <div v-html="convertLexicalToHTML({
+                  data: (item.description.root as SerializedEditorState)
+                  })"></div>
                   <p><strong>Role:</strong> {{ item.role }}</p>
                   <p><strong>Status:</strong> {{ item.status }}</p>
                   <p>
@@ -102,24 +106,6 @@ onMounted(() => {
             </div>
           </div>
         </template>
-        <!--        <div v-for="yearProject in yearsProjects" :key="yearProject.year" class="timeline__project-summary">-->
-        <!--          <h3 class="font-bold center">{{ yearProject.year }}</h3>-->
-        <!--          <div class="timeline__projects-wrapper">-->
-        <!--            <div class="timeline__projects" role="list">-->
-        <!--              <div v-for="project in yearProject.projects"-->
-        <!--                   role="listitem"-->
-        <!--                   :key="project.title"-->
-        <!--                   class="project-card flow">-->
-        <!--                <h4 class="text-xl font-semibold">{{ project.title }}</h4>-->
-        <!--                <p>{{ project.description }}</p>-->
-        <!--                <p><strong>Role:</strong> {{ project.role }}</p>-->
-        <!--                <p><strong>Status:</strong> {{ project.status }}</p>-->
-        <!--                <p><strong>Technologies:</strong> {{ project.technologies.join(', ') }}</p>-->
-        <!--                <p><strong>Duration:</strong> {{ project.startDate }} - {{ project.endDate || 'Ongoing' }}</p>-->
-        <!--              </div>-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--      </div>-->
       </div>
     </div>
   </section>
@@ -149,6 +135,7 @@ onMounted(() => {
   width: 100%;
 }
 
+
 .project-card {
   z-index: 3;
   position: absolute;
@@ -157,5 +144,40 @@ onMounted(() => {
   width: 100%;
   background-color: var(--color-primary);
   color: var(--color-dark-glare);
+  padding: var(--space-l);
+  overflow: auto;
 }
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  z-index: 4;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--color-dark-glare), var(--color-mid), var(--color-light));
+  background-size: 200% 100%;
+  animation: gradientShift 3s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.project-card__heading {
+  font-size: var(--size-step-4);
+  font-weight: bold;
+  line-height: var(--leading-fine);
+  max-width: 35ch;
+}
+
 </style>
