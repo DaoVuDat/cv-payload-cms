@@ -1,10 +1,18 @@
 <script setup lang="ts">
 import type {SerializedEditorState} from "@payloadcms/richtext-lexical/lexical";
 import {convertLexicalToHTML} from "@payloadcms/richtext-lexical/html";
+import {DateTime} from "luxon";
 
 const {data, error, status} = useFetch("/api/projects");
 
 const {$gsap: gsap, $scrollTrigger: scrollTrigger} = useNuxtApp();
+
+const toTimeString = (time: string) => {
+  return DateTime.fromISO(time, {zone: 'utc'})
+      .setZone('Asia/Ho_Chi_Minh')
+      .setLocale('en-US')
+      .toLocaleString(DateTime.DATE_FULL)
+}
 
 onMounted(() => {
   const years = gsap.utils.toArray(".timeline__year:not(:first-child)") as Element[];
@@ -68,7 +76,6 @@ onMounted(() => {
                   <h3>{{ project.year }}</h3>
                 </GlitchText>
               </div>
-
             </div>
           </div>
 
@@ -84,35 +91,48 @@ onMounted(() => {
                 class="timeline__project-summary"
             >
 
-              <div class="timeline__projects" role="list">
+              <div class="timeline__projects flow" role="list">
                 <div
                     v-for="item in project.projects"
                     role="listitem"
                     :key="item.title"
-                    class="project-card flow"
-                    :style="{'--flow-space': 'var(--space-m)'}"
+                    class="project-card"
                 >
-                  <h3 class="project-card__heading">{{ item.title }}</h3>
-                  <div
-                      class="project-card__description"
-                      v-html="convertLexicalToHTML({
+                  <div class="flow" :style="{'--flow-space': 'var(--space-m)'}">
+                    <h3 class="project-card__heading">{{ item.title }}</h3>
+                    <div class="project-card__meta">
+                      <div class="flow" :style="{'--flow-space': 'var(--space-xs)'}">
+                        <p>
+                          <strong>Role:</strong> {{ item.role.map(r => r.roleTitle).join(", ") }}
+                        </p>
+                        <p>
+                          <strong>Duration:</strong> {{ toTimeString(item.startDate) }} -
+                          {{ item.endDate ? toTimeString(item.endDate) : "Ongoing" }}
+                        </p>
+                        <div>
+                          <strong>Technologies:</strong>
+                          <ul role="list">
+                            <li v-for="tech in item.technologies" :key="tech.id!">
+                              {{ tech.technology }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                        class="project-card__description"
+                        v-html="convertLexicalToHTML({
                   data: (item.description as unknown as SerializedEditorState)
-                  })"
-                  ></div>
-                  <p><strong>Role:</strong> {{ item.role }}</p>
-                  <p><strong>Status:</strong> {{ item.status }}</p>
-                  <p>
-                    <strong>Technologies:</strong>
-                    {{ item.technologies.join(", ") }}
-                  </p>
-                  <p>
-                    <strong>Duration:</strong> {{ item.startDate }} -
-                    {{ item.endDate || "Ongoing" }}
-                  </p>
+                  })"/>
+
+                    <div class="project-card__banner">{{ item.status }}</div>
+
+                  </div>
+
                 </div>
               </div>
-
             </div>
+
           </div>
         </div>
       </div>
@@ -163,11 +183,52 @@ onMounted(() => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  border: 1px solid var(--color-light);
 }
 
 .project-card {
-  border: 1px solid red;
+  padding: var(--space-l);
+  border: 1px solid var(--color-primary);
+  max-width: 50ch;
+
+  position: relative;
+  overflow: hidden;
 }
+
+.project-card__heading {
+  font-size: var(--size-step-3);
+  line-height: var(--leading-fine);
+  max-width: 30ch;
+  font-weight: bold;
+}
+
+.project-card__description {
+  max-width: 50ch;
+  font-size: var(--size-step-1);
+  line-height: var(--leading-standard);
+  line-height: var(--leading-loose);
+}
+
+.project-card__meta {
+  font-size: var(--size-step-0);
+}
+
+.project-card__banner {
+  --flow-space: 0;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25%;
+  background-color: var(--color-primary);
+  color: var(--color-dark);
+  transform: translate(calc((1 - cos(45deg)) * 100%), -100%) rotate(45deg);
+  transform-origin: 0 100%;
+  z-index: 3;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: var(--size-step-0);
+  padding-block: var(--space-xs);
+}
+
 
 </style>
