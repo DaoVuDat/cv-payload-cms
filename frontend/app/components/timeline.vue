@@ -20,29 +20,37 @@ onMounted(() => {
 
   gsap.set(years, {yPercent: 101});
 
-  // Pin the left content
-  scrollTrigger.create({
-    trigger: ".timeline__scroll-content",
-    start: 'top 50%',
-    end: 'bottom 80%',
-    pin: '.timeline__left-content',
-  })
+  const mm = gsap.matchMedia()
 
-  contents.forEach((content, idx) => {
-    const heading = content.querySelectorAll(".project-card__heading")[0];
-
-    const animation = gsap.timeline()
-        .to(years[idx]!, {yPercent: 0})
-
-    // Change the year for the first item heading of the project card
+  mm.add('(min-width: 760px)', () => {
+    // Pin the left content
     scrollTrigger.create({
-      trigger: heading,
+      trigger: ".timeline__scroll-content",
       start: 'top 50%',
-      end: 'top 50%',
-      animation: animation,
-      scrub: true,
+      end: 'bottom 80%',
+      pin: '.timeline__left-content',
+      invalidateOnRefresh: true,
+    })
+
+    contents.forEach((content, idx) => {
+      const heading = content.querySelectorAll(".project-card__heading")[0];
+
+      const animation = gsap.timeline()
+          .to(years[idx]!, {yPercent: 0})
+
+      // Change the year for the first item heading of the project card
+      scrollTrigger.create({
+        trigger: heading,
+        start: 'top 50%',
+        end: 'top 50%',
+        animation: animation,
+        scrub: true,
+        invalidateOnRefresh: true,
+      })
     })
   })
+
+
 });
 </script>
 
@@ -72,7 +80,7 @@ onMounted(() => {
                 class="timeline__year"
             >
               <div>
-                <GlitchText text="projects." :rotate="-5">
+                <GlitchText :text="String(project.year)" :rotate="-5">
                   <h3>{{ project.year }}</h3>
                 </GlitchText>
               </div>
@@ -90,6 +98,11 @@ onMounted(() => {
                 :key="project.year"
                 class="timeline__project-summary"
             >
+              <div class="timeline__project-summary-year">
+                <GlitchText :text="String(project.year)" :rotate="-5">
+                  <h3>{{ project.year }}</h3>
+                </GlitchText>
+              </div>
 
               <div class="timeline__projects flow" role="list">
                 <div
@@ -176,14 +189,25 @@ onMounted(() => {
 
 .timeline__projects-summary {
   margin-inline: auto 0;
-  width: 90%;
+  width: 100%;
+}
+
+
+.timeline__projects {
+  margin: auto;
 }
 
 .timeline__project-summary {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
+
+.timeline__project-summary-year {
+  display: none;
+}
+
 
 .project-card {
   padding: var(--space-l);
@@ -197,7 +221,7 @@ onMounted(() => {
 .project-card__heading {
   font-size: var(--size-step-3);
   line-height: var(--leading-fine);
-  max-width: 30ch;
+  max-width: 25ch;
   font-weight: bold;
 }
 
@@ -230,5 +254,47 @@ onMounted(() => {
   padding-block: var(--space-xs);
 }
 
+@media screen and (width < 760px) {
+  .timeline__left-content {
+    display: none;
+  }
+
+  .timeline__project-summary-year {
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin-block-end:  var(--space-m);
+  }
+
+  .timeline__right-content {
+    width: 100%;
+  }
+
+  /* Project Card */
+  .project-card__heading {
+    font-size: var(--size-step-4);
+    line-height: var(--leading-fine);
+    max-width: 20ch;
+    font-weight: bold;
+  }
+
+  .project-card__description {
+    font-size: var(--size-step-2);
+  }
+
+  .project-card__meta {
+    font-size: var(--size-step-1);
+  }
+
+  .project-card__banner {
+    width: 35%;
+  }
+}
+
+@media screen and (width < 450px) {
+  .project-card__banner {
+    width: 45%;
+  }
+}
 
 </style>
