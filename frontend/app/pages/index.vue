@@ -1,6 +1,4 @@
 <script setup lang="ts">
-
-import Timeline from "~/components/timeline.vue";
 </script>
 
 <template>
@@ -8,7 +6,7 @@ import Timeline from "~/components/timeline.vue";
     <Hero />
     <Intro />
     <Timeline />
-    <div class="flex flex-col justify-center items-center min-h-screen">Contact</div>
+    <Contact />
   </div>
 </template>
 

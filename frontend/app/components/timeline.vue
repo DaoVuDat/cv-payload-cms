@@ -55,7 +55,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <section class="wrapper cover">
+  <section class="wrapper cover overflow-hidden">
     <div class="flow">
       <div class="center text-center">
         <GlitchText text="projects." :rotate="-5">
@@ -232,6 +232,21 @@ onMounted(() => {
   line-height: var(--leading-loose);
 }
 
+.project-card__description :deep(.list-number) {
+  list-style: decimal;
+  margin-inline-start: var(--space-m);
+  padding-inline-start: var(--space-m);
+}
+
+.project-card__description :deep(.list-number li) {
+  display: list-item;
+  list-style-type: decimal;
+}
+
+.project-card__description :deep(.list-number li::marker) {
+  font-size: var(--size-step-0);
+}
+
 .project-card__meta {
   font-size: var(--size-step-0);
 }
@@ -295,6 +310,13 @@ onMounted(() => {
   .project-card__banner {
     width: 45%;
   }
+
+  .project-card__description :deep(.list-number) {
+    list-style: decimal;
+    margin-inline-start: var(--space-s);
+    padding-inline-start: var(--space-s);
+  }
+
 }
 
 </style>
