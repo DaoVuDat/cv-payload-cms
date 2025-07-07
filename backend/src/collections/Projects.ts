@@ -2,6 +2,54 @@ import type { CollectionConfig } from 'payload'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
+  hooks: {
+    afterChange: [
+      async () => {
+        // Check if the environment variable is set
+        if (process.env.WEBHOOK) {
+          try {
+            // Send a POST request to the Vercel deploy hook URL
+            const response = await fetch(process.env.WEBHOOK, {
+              method: 'POST',
+            })
+
+            if (response.ok) {
+              console.log('Successfully triggered Vercel rebuild.')
+            } else {
+              console.error('Failed to trigger Vercel rebuild:', await response.text())
+            }
+          } catch (error) {
+            console.error('Error triggering Vercel rebuild:', error)
+          }
+        } else {
+          console.log('VERCEL_DEPLOY_HOOK_URL not set. Skipping rebuild.')
+        }
+      },
+    ],
+    afterDelete: [
+      async () => {
+        // Check if the environment variable is set
+        if (process.env.WEBHOOK) {
+          try {
+            // Send a POST request to the Vercel deploy hook URL
+            const response = await fetch(process.env.WEBHOOK, {
+              method: 'POST',
+            })
+
+            if (response.ok) {
+              console.log('Successfully triggered Vercel rebuild.')
+            } else {
+              console.error('Failed to trigger Vercel rebuild:', await response.text())
+            }
+          } catch (error) {
+            console.error('Error triggering Vercel rebuild:', error)
+          }
+        } else {
+          console.log('VERCEL_DEPLOY_HOOK_URL not set. Skipping rebuild.')
+        }
+      },
+    ],
+  },
   admin: {
     useAsTitle: 'title',
     description: 'Manage your project portfolio',
@@ -76,6 +124,7 @@ export const Projects: CollectionConfig = {
       name: 'startDate',
       type: 'date',
       label: 'Start Date',
+      index: true,
       required: true,
       admin: {
         description: 'When did this project begin?',
@@ -96,7 +145,7 @@ export const Projects: CollectionConfig = {
           displayFormat: 'MMM dd, yyyy',
         },
         condition: (data, siblingData) => {
-          return siblingData.status === 'completed';
+          return siblingData.status === 'completed'
         },
       },
     },
@@ -200,12 +249,12 @@ export const Projects: CollectionConfig = {
       hooks: {
         beforeValidate: [
           ({ value, originalDoc, data }) => {
-            if (value) return value;
+            if (value) return value
             if (data?.title) {
               return data.title
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, '-')
-                .replace(/(^-|-$)/g, '');
+                .replace(/(^-|-$)/g, '')
             }
           },
         ],
@@ -217,10 +266,10 @@ export const Projects: CollectionConfig = {
     beforeChange: [
       ({ data, operation }) => {
         if (operation === 'create') {
-          data.createdAt = new Date();
+          data.createdAt = new Date()
         }
-        data.updatedAt = new Date();
-        return data;
+        data.updatedAt = new Date()
+        return data
       },
     ],
   },

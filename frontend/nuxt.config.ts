@@ -2,40 +2,39 @@
 import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
-  compatibilityDate: '2025-05-15',
-  devtools: {enabled: true},
+  compatibilityDate: "2025-05-15",
+  devtools: { enabled: true },
   future: {
     compatibilityVersion: 4,
   },
   devServer: {
     port: 3001,
   },
-  css: [
-    '~/assets/css/global.css',
-  ],
+  css: ["~/assets/css/global.css"],
   vite: {
-    plugins: [
-      tailwindcss()
-    ]
+    plugins: [tailwindcss()],
   },
   typescript: {
-    typeCheck: true
+    typeCheck: true,
   },
-  modules: ['nuxt-svgo', '@nuxt/icon'],
+  modules: ["nuxt-svgo", "@nuxt/icon"],
   svgo: {
     dts: true,
   },
   runtimeConfig: {
-    cmsApi: process.env.CMS_API || 'http://localhost:3000/api',
+    cmsApi: process.env.CMS_API || "http://localhost:3000/api",
   },
   icon: {
     customCollections: [
       {
-        prefix: 'custom',
-        dir: './app/assets/icons',
-      }
-    ]
+        prefix: "custom",
+        dir: "./app/assets/icons",
+      },
+    ],
   },
   routeRules: {
-  }
-})
+    "/": {
+      prerender: true,
+    },
+  },
+});

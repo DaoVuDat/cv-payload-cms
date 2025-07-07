@@ -8,6 +8,7 @@ export default defineEventHandler(async (event) => {
     {
       query: {
         pagination: false,
+        sort: "-startDate",
       },
     }
   );
@@ -21,13 +22,13 @@ export default defineEventHandler(async (event) => {
 
   // Sort the results by year (in decending) and grouped by year
   const projectsGroupedByYear = data.docs
-    .sort((a, b) => {
-      return (
-        -1 *
-        (new Date(b.startDate).getFullYear() -
-          new Date(a.startDate).getFullYear())
-      );
-    })
+    // .sort((a, b) => {
+    //   return (
+    //     -1 *
+    //     (new Date(b.startDate).getFullYear() -
+    //       new Date(a.startDate).getFullYear())
+    //   );
+    // })
     .reduce((acc: ResponseProjects, project) => {
       const year = new Date(project.startDate).getFullYear();
       if (!acc[year]) {
