@@ -2,54 +2,6 @@ import type { CollectionConfig } from 'payload'
 
 export const Projects: CollectionConfig = {
   slug: 'projects',
-  hooks: {
-    afterChange: [
-      async () => {
-        // Check if the environment variable is set
-        if (process.env.WEBHOOK) {
-          try {
-            // Send a POST request to the Vercel deploy hook URL
-            const response = await fetch(process.env.WEBHOOK, {
-              method: 'POST',
-            })
-
-            if (response.ok) {
-              console.log('Successfully triggered Vercel rebuild.')
-            } else {
-              console.error('Failed to trigger Vercel rebuild:', await response.text())
-            }
-          } catch (error) {
-            console.error('Error triggering Vercel rebuild:', error)
-          }
-        } else {
-          console.log('VERCEL_DEPLOY_HOOK_URL not set. Skipping rebuild.')
-        }
-      },
-    ],
-    afterDelete: [
-      async () => {
-        // Check if the environment variable is set
-        if (process.env.WEBHOOK) {
-          try {
-            // Send a POST request to the Vercel deploy hook URL
-            const response = await fetch(process.env.WEBHOOK, {
-              method: 'POST',
-            })
-
-            if (response.ok) {
-              console.log('Successfully triggered Vercel rebuild.')
-            } else {
-              console.error('Failed to trigger Vercel rebuild:', await response.text())
-            }
-          } catch (error) {
-            console.error('Error triggering Vercel rebuild:', error)
-          }
-        } else {
-          console.log('VERCEL_DEPLOY_HOOK_URL not set. Skipping rebuild.')
-        }
-      },
-    ],
-  },
   admin: {
     useAsTitle: 'title',
     description: 'Manage your project portfolio',
@@ -270,6 +222,52 @@ export const Projects: CollectionConfig = {
         }
         data.updatedAt = new Date()
         return data
+      },
+    ],
+    afterChange: [
+      async () => {
+        // Check if the environment variable is set
+        if (process.env.WEBHOOK) {
+          try {
+            // Send a POST request to the Vercel deploy hook URL
+            const response = await fetch(process.env.WEBHOOK, {
+              method: 'POST',
+            })
+
+            if (response.ok) {
+              console.log('Successfully triggered Vercel rebuild.')
+            } else {
+              console.error('Failed to trigger Vercel rebuild:', await response.text())
+            }
+          } catch (error) {
+            console.error('Error triggering Vercel rebuild:', error)
+          }
+        } else {
+          console.log('VERCEL_DEPLOY_HOOK_URL not set. Skipping rebuild.')
+        }
+      },
+    ],
+    afterDelete: [
+      async () => {
+        // Check if the environment variable is set
+        if (process.env.WEBHOOK) {
+          try {
+            // Send a POST request to the Vercel deploy hook URL
+            const response = await fetch(process.env.WEBHOOK, {
+              method: 'POST',
+            })
+
+            if (response.ok) {
+              console.log('Successfully triggered Vercel rebuild.')
+            } else {
+              console.error('Failed to trigger Vercel rebuild:', await response.text())
+            }
+          } catch (error) {
+            console.error('Error triggering Vercel rebuild:', error)
+          }
+        } else {
+          console.log('VERCEL_DEPLOY_HOOK_URL not set. Skipping rebuild.')
+        }
       },
     ],
   },
