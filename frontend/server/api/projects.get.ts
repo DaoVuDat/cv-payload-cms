@@ -2,7 +2,7 @@ type ResponseProjects = Record<number, Project[]>;
 
 export default defineEventHandler(async (event) => {
   const config = useRuntimeConfig(event);
-  console.log(config.cmsApi);
+
   const data = await $fetch<PayloadResponse<Project>>(
     config.cmsApi + "/projects",
     {

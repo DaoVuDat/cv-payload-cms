@@ -37,4 +37,15 @@ export default defineNuxtConfig({
       prerender: true,
     },
   },
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: "en",
+      },
+    },
+  },
+  nitro: {
+    compressPublicAssets: true,
+    minify: true,
+  },
 });
