@@ -70,7 +70,7 @@ const tech: ITech[] = [
           With experience as a freelance optimization expert, specifically in construction, I have mastered applying
           metaheuristics to real-world challenges. This has honed my skills in analytical thinking, system design, and
           performance optimization. I am excited to bring this unique perspective and my development capabilities to a
-          backend or frontend role.
+          development role.
         </p>
       </div>
       <div>
@@ -141,3 +141,4 @@ const tech: ITech[] = [
 
 
 </style>
+
