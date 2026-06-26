@@ -272,6 +272,19 @@ export interface Blog {
     [k: string]: unknown;
   };
   thumbnail: number | Media;
+  category: 'web-development' | 'react' | 'nextjs' | 'backend' | 'devops';
+  tags?:
+    | {
+        tag: string;
+        id?: string | null;
+      }[]
+    | null;
+  author?: string | null;
+  /**
+   * Reading time in minutes
+   */
+  readingTime?: number | null;
+  publishedAt: string;
   updatedAt: string;
   createdAt: string;
 }
@@ -420,6 +433,16 @@ export interface BlogsSelect<T extends boolean = true> {
   shortDescription?: T;
   content?: T;
   thumbnail?: T;
+  category?: T;
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  author?: T;
+  readingTime?: T;
+  publishedAt?: T;
   updatedAt?: T;
   createdAt?: T;
 }
